@@ -152,10 +152,10 @@ Select  s.student_id,  s.first_name, s.last_name,SUM(p.amount) AS total_payments
 Select  c.course_name, COUNT(e.student_id) AS total from Courses c JOIN Enrollments e ON c.course_id = e.course_id Group by c.course_name order by total desc;
 
 3.	
-Select s.student_name from Students s LEFT JOIN Enrollments e ON s.student_id = e.student_id Where e.course_id Is null;
+Select s.first_name,s.last_name from Students s LEFT JOIN Enrollments e ON s.student_id = e.student_id Where e.course_id Is null;
 
 4.	
-Select   s.first_name,  s.last_name, c.course_name from Students s JOIN Enrollments e ON     s.student_id = e.student_id JOIN Courses c ON e.course_id = c.course_id;
+Select   s.first_name,  s.last_name, c.course_name from Students s JOIN Enrollments e ON  s.student_id = e.student_id JOIN Courses c ON e.course_id = c.course_id;
 
 5.	
 Select  t.first_name,  t.last_name, c.course_name from Teacher t LEFT JOIN Courses c ON   t.teacher_id = c.teacher_id;
@@ -208,15 +208,15 @@ Select course_name from CoursesWHERE course_id not in (SELECT course_id     from
 Select student_id, course_id, sum(amount) as total_payment from Payments Group by student_id, course_id;
 
 10.	  
-Select s.student_name, SUM(p.amount) AS total_payment from Students s JOIN       Payments p ON s.student_id = p.student_id group by s.student_name;
+Select s.first_name,s.last_name SUM(p.amount) AS total_payment from Students s JOIN       Payments p ON s.student_id = p.student_id group by s.first_name,s.last_name ;
 
 11.
-Select  s.student_name, SUM(p.amount) AS total_payment from  Students s
-Join Payments p ON s.student_id = p.student_id group by s.student_name;
+Select  s.first_name,s.last_name , SUM(p.amount) AS total_payment from  Students s
+Join Payments p ON s.student_id = p.student_id group by s.first_name,s.last_name ;
 
 12.	 
 Select c.course_name, COUNT(e.student_id) AS total_enrolled from Courses c
 JOIN Enrollments e ON c.course_id = e.course_id group by c.course_name;
 
 13.	
-Select s.student_name, AVG(p.amount) AS avg_payment From Students s JOIN Payments p ON s.student_id = p.student_id Group by s.student_name;
+Select s.first_name,s.last_name , AVG(p.amount) AS avg_payment From Students s JOIN Payments p ON s.student_id = p.student_id Group by s.first_name,s.last_name ;
